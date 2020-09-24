@@ -1,11 +1,11 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');?>
 <!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Video List</h1>
+<h1 class="h3 mb-4 text-gray-800">Log Download</h1>
 <!-- Video List Card -->
 <div class="card shadow mb-4">
   <!-- Card Header - Accordion -->
   <a href="#video_metadata" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
-    <h6 class="m-0 font-weight-bold text-gray-800">Video Approved History</h6>
+    <h6 class="m-0 font-weight-bold text-gray-800">Video Download History</h6>
   </a>
   <!-- Card Content - Collapse -->
   <div class="collapse show" id="video_metadata">
