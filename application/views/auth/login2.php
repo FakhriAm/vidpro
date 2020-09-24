@@ -176,7 +176,7 @@ a.socialIcon:hover,
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate = "Password is required">
-                        <input class="input100" type="password" name="pass" placeholder="Password">
+                        <input class="input100" type="password" name="pass" placeholder="">
                         
                     </div>
 
