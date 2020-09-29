@@ -29,7 +29,7 @@ class My_model extends CI_Model{
 		$this->db->join('menu','groups_auth.id_menu = menu.id');
 		$this->db->where('groups_auth.id_group',$id_group);
 		$this->db->where('groups_auth.active',1);
-		$this->db->order_by('id_menu','asc');
+		$this->db->order_by('short','asc');
 		return $this->db->get()->result();
 	}
 

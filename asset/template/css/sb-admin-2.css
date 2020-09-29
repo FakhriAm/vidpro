@@ -11,7 +11,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-:root {
+ :root {
   --blue: #4e73df;
   --indigo: #6610f2;
   --purple: #6f42c1;
@@ -6002,10 +6002,8 @@ a.bg-dark:hover, a.bg-dark:focus, button.bg-dark:hover, button.bg-dark:focus {
 }
 
 .bg-white {
-  /* background-color: #fff !important; */
-  /* background: rgb(77,63,63); */
-  background: linear-gradient(90deg, rgba(77,63,63,1) 0%, rgba(210,39,39,0.7595413165266106) 25%, rgba(61,54,185,0.938813025210084) 44%, rgba(163,16,151,0.773546918767507) 60%, rgba(255,255,255,1) 80%, rgba(230,230,230,0.6643032212885154) 100%);  
-
+  background: rgb(46,46,48);
+background: linear-gradient(90deg, rgba(46,46,48,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%); 
 
 }
 .bg-transparent {
@@ -9013,8 +9011,8 @@ a:focus {
 /* ini untuk panel */
 
 .bg-gradient-primary {
-  background-color: #2d2b2b;
-  background-image: linear-gradient(180deg, #444140 20%, #224abe 100%);
+  background: rgb(22,22,24);
+background: linear-gradient(180deg, rgba(22,22,24,1) 0%, rgba(57,57,121,1) 71%, rgba(8,99,117,1) 100%);
   background-size: cover;
 }
 
@@ -9129,7 +9127,7 @@ a:focus {
 }
 
 .text-gray-600 {
-  color: #858796 !important;
+  color: #fff !important;
 }
 
 .text-gray-700 {

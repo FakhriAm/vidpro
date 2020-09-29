@@ -30,7 +30,7 @@
           <div class="row">
             <label class="label col-2 text-right">Company</label>
             <div class="col-md-9">
-              <input type="text" class="form-control" placeholder="Employee Companion" name="emp_comp">
+              <?php echo $filter_category;?>
             </div>
           </div>
         </div>
