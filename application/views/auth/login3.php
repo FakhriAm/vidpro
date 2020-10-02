@@ -27,7 +27,7 @@
 	<!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/Login/css/util.css') ?>">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/Login/css/main.css') ?>">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/sweetalert/sweetalert.css')?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('asset/sweetalert/sweetalert.css') ?>">
 	<!--===============================================================================================-->
 </head>
 
@@ -42,7 +42,7 @@
 						Video Content
 					</span>
 
-					<div class="validate-input" data-validate = "Valid NIK is required">
+					<div class="validate-input" data-validate="Valid NIK is required">
 						<span class="label-input100">Username</span>
 						<input class="input100" type="text" name="nik" placeholder="Username">
 						<span class="focus-input100" data-symbol=""></span>
@@ -63,11 +63,11 @@
 					<div class="container-login100-form-btn">
 						<div class="wrap-login100-form-btn">
 							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn" href="#" onclick="login()" id="btn-login">
+							<button href="#" id="btn-login" class="login100-form-btn" onclick="login()">
 								Login
 							</button>
 						</div>
-                    </div>
+					</div>
 					<div class="flex-col-c p-t-155">
 						<span class="txt1 p-b-17">
 							Or Sign Up Using
@@ -83,11 +83,11 @@
 	</div>
 
 
-	
+
 
 	<!--===============================================================================================-->
 	<script src="<?php echo base_url('asset/Login/vendor/jquery/jquery-3.2.1.min.js') ?>"></script>
-	
+
 	<!--===============================================================================================-->
 	<script src="<?php echo base_url('asset/Login/vendor/animsition/js/animsition.min.js') ?>"></script>
 	<!--===============================================================================================-->
@@ -102,34 +102,35 @@
 	<script src="<?php echo base_url('asset/Login/vendor/countdowntime/countdowntime.js') ?>"></script>
 	<!--===============================================================================================-->
 	<script src="<?php echo base_url('asset/Login/js/main.js') ?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('asset/sweetalert/sweetalert.min.js')?>"></script>
-    <script type="text/javascript">
-        function login(){
-            $.ajax({
-                url:"<?php echo base_url('auth/login')?>",
-                type:"POST",
-                data:$('#form-login').serialize(),
-                dataType: "JSON",
-                beforeSend: function(){
-                    $('#btn-login').attr("disabled", true);
-                },
-                success: function(data){
-                    if(!data.status) showAlert(data.message);
-                    else window.location = data.url;
-                },
-                error: function (jqXHR, textStatus, errorThrown){
-                    alert(jqXHR+" "+textStatus+" "+errorThrown);
-                },
-                complete: function(){
-                    $('#btn-login').removeAttr("disabled");
-                }
-            });
-        }
-        function showAlert(text){
-            text = text.toString();
-             swal('Login Failure',text.replace(/<[^>]*>/g, ''),'error');
-        }
-    </script>
+	<script type="text/javascript" src="<?php echo base_url('asset/sweetalert/sweetalert.min.js') ?>"></script>
+	<script type="text/javascript">
+		function login() {
+			$.ajax({
+				url: "<?php echo base_url('auth/login') ?>",
+				type: "POST",
+				data: $('#form-login').serialize(),
+				dataType: "JSON",
+				beforeSend: function() {
+					$('#btn-login').attr("disabled", true);
+				},
+				success: function(data) {
+					if (!data.status) showAlert(data.message);
+					else window.location = data.url;
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					alert(jqXHR + " " + textStatus + " " + errorThrown);
+				},
+				complete: function() {
+					$('#btn-login').removeAttr("disabled");
+				}
+			});
+		}
+
+		function showAlert(text) {
+			text = text.toString();
+			swal('Login Failure', text.replace(/<[^>]*>/g, ''), 'error');
+		}
+	</script>
 
 </body>
 
