@@ -15,6 +15,8 @@ $(document).ready(function() {
         "buttons": ['excel','print'],
         "columnDefs": [{"targets": [ 1,8 ],"orderable": false}]
     });
+	
+	//$("#upload_num").html('2');
 });
 function showModal(id){
 	document.getElementById('form-modal').reset();

@@ -10,16 +10,7 @@
   <div class="collapse show" id="video_metadata">
     <div class="card-body">
       <form id="formuploader" enctype="multipart/form-data">
-       
-      <div class="form-group">
-          <div class="row">
-            <label class="label col-2 text-right">Video Title</label>
-            <div class="col-md-9">
-              <input type="text" class="form-control" placeholder="Enter Video Title" name="videotitle">
-            </div>
-          </div>
-        </div>
-        <div class="form-group">
+         <div class="form-group">
           <div class="row">
             <p class="label col-2 text-right">Choose Video</p>
             <div class="col-md-9">
@@ -37,6 +28,16 @@
             </div>
           </div>
         </div>
+       
+      <div class="form-group">
+          <div class="row">
+            <label class="label col-2 text-right">Video Title</label>
+            <div class="col-md-9">
+              <input type="text" class="form-control" placeholder="Enter Video Title" name="videotitle">
+            </div>
+          </div>
+        </div>
+       
 
         <div class="form-group">
           <div class="row">
@@ -68,11 +69,20 @@
             </div>
           </div>
         </div> -->
-        <div class="form-group">
+        
+         <div class="form-group">
           <div class="row">
             <label class="label col-2 text-right">Category</label>
             <div class="col-md-9">
               <?php echo $filter_category; ?>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <label class="label col-2 text-right">Source</label>
+            <div class="col-md-9">
+              <?php echo $filter_source; ?>
             </div>
           </div>
         </div>

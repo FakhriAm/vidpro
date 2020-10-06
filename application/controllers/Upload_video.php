@@ -8,9 +8,14 @@ class Upload_video extends MY_Controller {
 
 	public function index(){
         $lists = $this->upload_video->get_list_video_category();
+        $lists2 = $this->upload_video->get_list_video_source();
         $opt = array(0 => 'Select Category');
         foreach ($lists as $key => $value) $opt[$key] = $value;
-        $this->load->view('part/default/wrapper',array('content'=>'upload_video/upload_video_view','content_js'=>'upload_video/upload_video_js','menu'=>$this->getAllUserMenu(),'filter_category'=>form_dropdown('',$opt,'','name="id_video_category" class="form-control"')));
+
+        $opt2 = array(0 => 'Select Source');
+        foreach ($lists2 as $key2 => $value2) $opt2[$key2] = $value2;
+
+        $this->load->view('part/default/wrapper',array('content'=>'upload_video/upload_video_view','content_js'=>'upload_video/upload_video_js','menu'=>$this->getAllUserMenu(),'filter_category'=>form_dropdown('',$opt,'','name="id_video_category" class="form-control"'),'filter_source'=>form_dropdown('',$opt2,'','name="id_video_source" class="form-control"')));
 	}
 
     public function ajax_savevideo(){
@@ -18,18 +23,19 @@ class Upload_video extends MY_Controller {
 	    $this->form_validation->set_rules('journo','journalist','trim|required|max_length[50]');
 	    $this->form_validation->set_rules('desc','description','trim|required|max_length[160]');
         $this->form_validation->set_rules('tag','tag','trim|required');
+        $this->form_validation->set_rules('id_video_source','video category','trim|required|is_natural_no_zero');
         $this->form_validation->set_rules('id_video_category','video category','trim|required|is_natural_no_zero');
-        $this->form_validation->set_rules('hour','duration hour','trim|required|is_natural|less_than[100]');
-        $this->form_validation->set_rules('minute','duration minute','trim|required|is_natural|less_than[60]');
-        $this->form_validation->set_rules('second','duration second','trim|required|is_natural|less_than[60]');
-	    if($this->form_validation->run()===FALSE) echo json_encode(array("status" => FALSE,"message" => validation_errors()));	
-		else{ 
+        // $this->form_validation->set_rules('hour','duration hour','trim|required|is_natural|less_than[100]');
+        // $this->form_validation->set_rules('minute','duration minute','trim|required|is_natural|less_than[60]');
+        // $this->form_validation->set_rules('second','duration second','trim|required|is_natural|less_than[60]');
+	   if($this->form_validation->run()===FALSE) echo json_encode(array("status" => FALSE,"message" => validation_errors()));  
+        else{ 
           $video = $_FILES['videofile'];
             $thumbnail = $_FILES['thumbfile'];
-/* 			var_dump($video);
-			var_dump($thumbnail);
-			exit(); */
-	        if(!empty($video['name']) && !empty($thumbnail['name'])){
+/*          var_dump($video);
+            var_dump($thumbnail);
+            exit(); */
+            if(!empty($video['name']) && !empty($thumbnail['name'])){
                 //check format
                 if($this->validate_video_format($video['type'])){
                     if($this->validate_thumbnail_format($thumbnail['type'])){
@@ -56,11 +62,11 @@ class Upload_video extends MY_Controller {
                                 else{
                                     $thumbnail_name = $timestamp."_".$thumbnail['name'];
                                     
-									if(!ftp_put($conn_id, '/home/cnnftpvcp/thumbnail/'.$thumbnail_name, $thumbnail['tmp_name'], FTP_BINARY)) $thumbnail_name = '/home/cnnftpvcp/thumbnail/ex_thumbnail.jpg';
+                                    if(!ftp_put($conn_id, '/home/cnnftpvcp/thumbnail/'.$thumbnail_name, $thumbnail['tmp_name'], FTP_BINARY)) $thumbnail_name = '/home/cnnftpvcp/thumbnail/ex_thumbnail.jpg';
                                     else {
-										ftp_chmod($conn_id, 0644, '/home/cnnftpvcp/thumbnail/'.$thumbnail_name);
+                                        ftp_chmod($conn_id, 0644, '/home/cnnftpvcp/thumbnail/'.$thumbnail_name);
                                         $file = explode(".", $video_name);
-                                        $insert = $this->upload_video->save(array('video_title'=>strip_tags($this->input->post('videotitle')),'journalist'=>strip_tags($this->input->post('journo')),'description'=>strip_tags($this->input->post('desc')),'uploaded_date'=>date('Y:m:d H:i:s'),'uploader'=>$this->session->userdata('id'),'id_thumbnail'=>$thumbnail_name,'video_id'=>$video_name,'video_low'=>$file[0].".m3u8",'tag'=>strip_tags($this->input->post('tag')),'id_video_category'=>$this->input->post('id_video_category'),'duration'=>$this->generateDuration($this->input->post('hour'),$this->input->post('minute'),$this->input->post('second'))));
+                                        $insert = $this->upload_video->save(array('video_title'=>strip_tags($this->input->post('videotitle')),'journalist'=>strip_tags($this->input->post('journo')),'description'=>strip_tags($this->input->post('desc')),'uploaded_date'=>date('Y:m:d H:i:s'),'uploader'=>$this->session->userdata('id'),'id_thumbnail'=>$thumbnail_name,'video_id'=>$video_name,'video_low'=>$file[0].".m3u8",'tag'=>strip_tags($this->input->post('tag')),'id_video_category'=>$this->input->post('id_video_category'),'id_video_source'=>$this->input->post('id_video_source')));
                                         echo json_encode(array("status" => true,"message"=>"Video & thumbnail uploaded sucessfully"));
                                     }  
                                 }
@@ -69,9 +75,8 @@ class Upload_video extends MY_Controller {
                         }
                     } else echo json_encode(array("status" => false,'message'=>'Thumbnail format is not permitted'));
                 } else echo json_encode(array("status" => false,'message'=>'Video format is not permitted'));
-	        } else echo json_encode(array("status" => false,'message'=>'video and thumbnail cannot be null'));
-		}
-		 
+            } else echo json_encode(array("status" => false,'message'=>'video and thumbnail cannot be null'));
+        }
 	}
 
     public function validate_video_format($video){

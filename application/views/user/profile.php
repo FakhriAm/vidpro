@@ -70,7 +70,7 @@
                                             </div>
                                         </div>
                                         <div class="userData ml-3">
-                                            <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">Fakhri Ammarrizky</a></h2>
+                                            <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);"><?php echo $this->session->userdata('name') ?></a></h2>
                                             <h6 class="d-block"><a href="javascript:void(0)">1,500</a> Video Uploads</h6>
                                             <h6 class="d-block"><a href="javascript:void(0)">300</a> Video Downloads</h6>
                                         </div>
