@@ -12,21 +12,20 @@
   <div class="sidebar">
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-      <ul class="nav nav-sidebar flex-column nav-item has-treeview" data-widget="treeview" role="menu" data-accordion="false">
-        <?php if (isset($menu) && sizeof($menu) > 0) {
+     
+
+      <ul class="nav nav-treeview">
+      <?php if (isset($menu) && sizeof($menu) > 0) {
           foreach ($menu as $key) {
         ?>
-            <!-- Nav Item -->
-            <li class="nav-item">
+              <li class="nav-item">
               <a class="nav-link" href="<?php echo base_url($key->link) ?>">
-                <i class="nav-icon <?php echo $key->icon ?>"></i>
-                <span><?php echo $key->content ?></span></a>
-            </li>
-
-        <?php }
-        } ?>
-
-      </ul>
+              <i class="nav-icon <?php echo $key->icon ?>"></i>
+              <span><?php echo $key->content ?></span></a>
+                </a>
+              </li>
+            <?php }} ?>
+          </ul>
     </nav>
     <!-- /.sidebar-menu -->
   </div>

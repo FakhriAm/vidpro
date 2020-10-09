@@ -38,9 +38,12 @@
 			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54">
 				<form class="login100-form validate-form" method="post" id="form-login">
 					<img src="https://upload.wikimedia.org/wikipedia/commons/0/09/TransMedia.svg" alt="Girl in a jacket" width="400" height="60">
-					<span class="login100-form-title p-b-49">
+					<span class="login100-form-title ">
 						Video Content
 					</span>
+					<h4 style="text-align: center; color:#3366e8; font-weight: bold;">
+						CMS Login
+					</h4>
 
 					<div class="validate-input" data-validate="Valid NIK is required">
 						<span class="label-input100">Username</span>
