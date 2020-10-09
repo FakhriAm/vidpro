@@ -12,10 +12,18 @@
   <div class="sidebar">
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-     
-
-      <ul class="nav nav-treeview">
-      <?php if (isset($menu) && sizeof($menu) > 0) {
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <!-- <i class="nav-icon fas fa-copy"></i> -->
+            <i class="nav-icon far fa-folder-open"></i>
+            <p>
+              User Menu
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+          <?php if (isset($menu) && sizeof($menu) > 0) {
           foreach ($menu as $key) {
         ?>
               <li class="nav-item">
@@ -26,6 +34,9 @@
               </li>
             <?php }} ?>
           </ul>
+        </li>
+        
+      </ul>
     </nav>
     <!-- /.sidebar-menu -->
   </div>
