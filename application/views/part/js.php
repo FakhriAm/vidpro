@@ -10,7 +10,7 @@
         <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
-    <!-- Scroll to Top Button-->
+
     
     <!-- Bootstrap core JavaScript-->
     <script src="<?php echo base_url('asset/template/vendor/jquery/jquery.min.js') ?>"></script>

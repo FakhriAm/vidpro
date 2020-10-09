@@ -12,7 +12,7 @@
   <div class="sidebar">
     <!-- Sidebar Menu -->
     <nav class="mt-2">
-      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+      <ul class="nav nav-sidebar flex-column nav-item has-treeview" data-widget="treeview" role="menu" data-accordion="false">
         <?php if (isset($menu) && sizeof($menu) > 0) {
           foreach ($menu as $key) {
         ?>

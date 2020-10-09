@@ -99,7 +99,7 @@
                                                         <label style="font-weight:bold;">Full Name</label>
                                                     </div>
                                                     <div class="col-md-8 col-6">
-                                                        Fakhri Ammarrizky
+                                                      <p><?php echo $this->session->userdata('name') ?></p>
                                                     </div>
                                                 </div>
                                                 <hr />
@@ -109,7 +109,7 @@
                                                         <label style="font-weight:bold;">NIK</label>
                                                     </div>
                                                     <div class="col-md-8 col-6">
-                                                        200271155
+                                                    <p><?php echo $this->session->userdata('id') ?></p>
                                                     </div>
                                                 </div>
                                                 <hr />

@@ -1,8 +1,23 @@
 <?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
-<!-- Page Heading -->
-<h1 class="h3 mb-4 text-gray-800">Upload Video</h1>
-<!-- Video History Card -->
-<div class="card shadow mb-4">
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="h3 mb-4 text-gray-800">Upload Video</h1>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+
+
+        <div class="card shadow mb-4">
   <!-- Card Header - Accordion -->
   <a href="#video_metadata" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
     <h6 class="m-0 font-weight-bold text-gray-800">Video History</h6>
@@ -168,3 +183,11 @@
     </div>
   </div>
 </div>
+
+
+
+
+
+        </div>
+
+    </section>
