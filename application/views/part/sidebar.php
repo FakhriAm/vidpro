@@ -23,19 +23,97 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-          <?php if (isset($menu) && sizeof($menu) > 0) {
-          foreach ($menu as $key) {
-        ?>
-              <li class="nav-item">
-              <a class="nav-link" href="<?php echo base_url($key->link) ?>">
-              <i class="nav-icon <?php echo $key->icon ?>"></i>
-              <span><?php echo $key->content ?></span></a>
-                </a>
-              </li>
-            <?php }} ?>
+            <?php if (isset($menu) && sizeof($menu) > 0) {
+              foreach ($menu as $key) {
+            ?>
+                <li class="nav-item">
+                  <a class="nav-link" href="<?php echo base_url($key->link) ?>">
+                    <i class="nav-icon <?php echo $key->icon ?>"></i>
+                    <span><?php echo $key->content ?></span></a>
+                  </a>
+                </li>
+            <?php }
+            } ?>
           </ul>
         </li>
-        
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <!-- <i class="nav-icon fas fa-copy"></i> -->
+            <i class="nav-icon fas fa-server"></i>
+            <p>
+              Source Company
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+
+            <li>
+              <a href="#" class="nav-link">
+                <p>
+                  CNN Indonesia
+
+                </p>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link">
+                <p>
+                  TRANS TV
+
+                </p>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link">
+                <p>
+                  TRANS 7
+
+                </p>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link">
+                <p>
+                  TRANS VISION
+
+                </p>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link">
+                <p>
+                  CNBC Indonesia
+
+                </p>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link">
+                <p>
+                  DETIK COM
+
+                </p>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link">
+                <p>
+                  FEMALE DAILY
+
+                </p>
+              </a>
+            </li>
+            <li>
+              <a href="#" class="nav-link">
+                <p>
+                  BEAUTY NESIA
+
+                </p>
+              </a>
+            </li>
+          </ul>
+        </li>
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->
@@ -94,6 +172,8 @@
   <!-- SEARCH FORM -->
 
 
+
+
   <!-- Setelah Sign In -->
   <ul class="navbar-nav ml-auto">
     <li class="nav-item d-none d-sm-inline-block">
@@ -107,8 +187,8 @@
           <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
           Profile
         </a>
-      
-        
+
+
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
           <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>

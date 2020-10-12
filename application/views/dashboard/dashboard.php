@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                <h1 class="h3 mb-4 text-gray-800">Dashboard</h1>
+                <h1 class="h3 mb-4 text-gray-800">Latest News Video</h1>
                 </div>
             </div>
         </div><!-- /.container-fluid -->
@@ -14,18 +14,9 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-
-
             <div class="card shadow mb-4">
-                <!-- Card Header - Accordion -->
-                <a href="#video_metadata" class="d-block card-header py-3">
-                    <!-- <h6 class="m-0 font-weight-bold text-gray-800">User Profile</h6> -->
-                </a>
-                <!-- Card Content - Collapse -->
                 <!-- Main content -->
                 <section class="content">
-
-
                     <div class="card-header">
                         <div class="row">
                             <div class="col-3">
@@ -306,20 +297,11 @@
                             </div>
                         </div>
                     </div>
-
                     <!-- Button Load More -->
                     <div class="card-footer text-center">
                         <a href="">Load More</a>
                     </div>
-
-
                 </section>
                 <!-- /.content -->
-
-
-
-
-
             </div>
-
     </section>

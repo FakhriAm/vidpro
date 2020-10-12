@@ -11,7 +11,7 @@ class Video_model extends CI_Model {
         $this->db->from('video_category');
         $this->db->where('active',1);
         $result = $this->db->get()->result();
-	$lists = array();
+	    $lists = array();
         foreach ($result as $row) $lists[$row->id] = $row->content;	
         return $lists;
     }

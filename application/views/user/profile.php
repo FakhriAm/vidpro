@@ -79,6 +79,7 @@
                                         </div>
                                     </div>
                                 </div>
+                            </div>
 
                                 <div class="row">
                                     <div class="col-12">
@@ -156,7 +157,7 @@
                                                             <input class="input100" type="password" name="oldpass" placeholder="">
                                                         </div>
                                                     </div>
-                                                    <hr />
+                                                    <br />
 
                                                     <div class="row">
                                                         <div class="col-sm-3 col-md-2 col-5">
@@ -183,6 +184,7 @@
                                                        Submit
                                                     </button>
                                                 </div>
+                                                <br />
                                             </div>
                                         </div>
                                     </div>
@@ -193,8 +195,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-</div>
+        
+
 
 </section>
 
@@ -241,44 +243,3 @@
     });
 </script>
 
-
-<!-- /.content-wrapper
-
-             <!-- <div class="row">
-                    <div class="col-md-6">
-
-                      
-                        <div class="card card-primary card-outline">
-                            <div class="card-body box-profile">
-                                <div class="text-center">
-                                    <img class="profile-user-img img-fluid img-circle" src="<?php echo base_url('asset/img/trans.png') ?>" alt="User profile picture">
-                                </div>
-
-                                <h3 class="profile-username text-center">Fakhri Ammarrizky</h3>
-
-                               
-
-                                <ul class="list-group list-group-unbordered mb-3">
-                                    <li class="list-group-item">
-                                        <b>Username : </b> <a class="float-right">Fakhri Ammarrizky</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>NIK :</b> <a class="float-right">200271154</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Company :</b> <a class="float-right">CNN Indonesia</a>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <b>Div / Dept :</b> <a class="float-right">Business Operation</a>
-                                    </li>
-                                </ul>
-
-                                <a href="#" class="btn btn-warning btn-block"><b>Change Password</b></a>
-                            </div>
-                            
-                        </div>
-                    </div> 
-
-
-                    
-                </div> -->

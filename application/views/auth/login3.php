@@ -42,7 +42,7 @@
 						Video Content
 					</span>
 					<h4 style="text-align: center; color:#3366e8; font-weight: bold;">
-						CMS Login
+						Sharing Media
 					</h4>
 
 					<div class="validate-input" data-validate="Valid NIK is required">
