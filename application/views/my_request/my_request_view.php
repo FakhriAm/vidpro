@@ -25,39 +25,28 @@
                 </a>
                 <!-- Card Content - Collapse -->
                 <div class="collapse show" id="video_metadata">
-                    <div class="card-body">
-                        <div class="col-xl-2 col-md-2 mb-2">
-                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_form"><i class="fa fa-plus-square"></i> Form Request</button>
+                    <div class="card-body col-xl-12 col-md-12 mb-12"">
+                        <div class="col-xl-1 col-md-1 mb-1">
+                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#modal_form"><i class="fa fa-plus-square"></i> Request</button>
 
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-bordered" id="request_list_table" width="100%" cellspacing="0">
+                            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
                                         <th>No</th>
                                         <th>Request Date</th>
                                         <th>Request To</th>
+                                        <th>Request From</th>
                                         <th>Program Name</th>
                                         <th>Note's</th>
                                         <th>Status</th>
                                         <th>Receive Date</th>
-
                                     </tr>
                                 </thead>
 
                                 <tbody>
-                                    <!-- <tr>
-                                        <td><img src="<?php echo base_url('asset/img/1.jpg') ?>" class="img-thumbnail"></td>
-                                        <td>1</td>
-                                        <td>10/12/20 - 17:03</td>
-                                        <td>Trans Tv</td>
-                                        <td>Desi Anwar</td>
-                                        <td>10 Oktober 2020 Sesi 1</td>
-                                        <td><button type="button" class="btn btn-block btn-warning btn-flat">On-Progress</button></td>
-                                        <td>00/00/00 - 00:00</td>
-                                    </tr> -->
-
-
+                                  
                                 </tbody>
                             </table>
                         </div>
@@ -74,7 +63,7 @@
                         </div>
                         <div class="modal-body form">
                             <form action="#" id="form" class="form-horizontal">
-                                <input type="hidden" value="" id="id_administration_type" name="id_administration_type" />
+                                <input type="hidden" value="" id="" name="" />
                                 <input type="hidden" value="" id="id" name="id" />
                                 <div class="form-body">
                                     <div class="form-group">
@@ -145,4 +134,4 @@
 
 
     </section>
-    <?php $this->load->view('my_request/my_request_js.php'); ?>
+   

@@ -1,54 +1,58 @@
-<script src="<?php echo base_url('asset/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') ?>"></script>
-<script src="<?php echo base_url('asset/bootstrap-datepicker/js/bootstrap-datepicker.min.js') ?>"></script>
-<script src="<?php echo base_url('asset/bootstrap-datepicker/js/dataTables.buttons.min.js') ?>"></script>
 <script type="text/javascript">
     var table;
     $(document).ready(function() {
-        initDataTable();
-        $('#btn-filter').click(function() {
-            table.ajax.reload();
-        });
-        $('#btn-reset').click(function() {
-            $('#form-filter')[0].reset();
-            table.ajax.reload();
-        });
-
-        $('.datepicker').datepicker({
-            autoclose: true,
-            format: "yyyy-mm-dd",
-            todayHighlight: true,
-            orientation: "top auto",
-            todayBtn: true,
-            todayHighlight: true,
-        });
-
-        $("#userfile").change(function() {
-            filePreview(this);
-        });
-    });
-
-    function initDataTable() {
-        table = $('#request_list_table').DataTable({
+        table = $('#dataTable').DataTable({
             "processing": true,
             "serverSide": true,
             "order": [],
             "destroy": true,
             "ajax": {
-                "url": "<?php echo site_url('log_download/ajax_list') ?>",
+                "url": "<?php echo site_url('my_request/ajax_list') ?>",
                 "type": "POST",
-                "data": function(data) {
-                    data.name = $('#name').val();
-                }
+                "data": function(data) {}
             },
             "dom": 'lfBrtip',
             "buttons": ['excel', 'print'],
             "columnDefs": [{
-                "targets": [0],
-                "orderable": false,
-            }, ],
-
+                "targets": [1, 8],
+                "orderable": false
+            }],
+            "columnDefs": [
+                //hide the second & fourth column
+                {
+                    'visible': false,
+                    'targets': [3]
+                }
+            ]
         });
-    }
 
-    
+        //$("#upload_num").html('2');
+    });
+
+    function save(){
+    $('#btnSave').text('saving...');
+    $('#btnSave').attr('disabled',true); 
+    var url = "<?php echo site_url('my_request/ajax_add')?>";
+    $.ajax({
+        url : url,
+        type: "POST",
+        data: $('#form').serialize(),
+        dataType: "JSON",
+        success: function(data){
+			if(data.status == false) alert(data.message);
+			else{
+				$('#modal_form').modal('hide');
+                reload_table();
+			}
+            $('#btnSave').text('save');
+            $('#btnSave').attr('disabled',false);
+        },
+        error: function (jqXHR, textStatus, errorThrown){
+            alert('Error adding / update data');
+            $('#btnSave').text('save');
+            $('#btnSave').attr('disabled',false); 
+        }
+    });
+}
+
 </script>

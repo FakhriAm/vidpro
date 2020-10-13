@@ -31,9 +31,9 @@
     <!-- AdminLTE for demo purposes -->
     <script src="<?php echo base_url('asset/AdminLTE/dist/js/demo.js') ?>"></script>
 
-    <script src="<?php echo base_url('asset/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') ?>"></script>
+    <!-- <script src="<?php echo base_url('asset/bootstrap-datepicker/css/bootstrap-datepicker3.min.css') ?>"></script>
     <script src="<?php echo base_url('asset/bootstrap-datepicker/js/bootstrap-datepicker.min.js') ?>"></script>
-    <script src="<?php echo base_url('asset/bootstrap-datepicker/js/dataTables.buttons.min.js') ?>"></script>
+    <script src="<?php echo base_url('asset/bootstrap-datepicker/js/dataTables.buttons.min.js') ?>"></script> -->
 
     <script type="text/javascript">
         function showAlert(title, text, icon) {

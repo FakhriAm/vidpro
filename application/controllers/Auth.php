@@ -25,4 +25,5 @@ class Auth extends CI_Controller {
 	public function page404(){
 		$this->load->view('errors/error_404');
 	}
+	
 }
