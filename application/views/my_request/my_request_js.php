@@ -26,8 +26,12 @@
             ]
         });
 
-        //$("#upload_num").html('2');
     });
+
+    function reload_table(){
+    table.ajax.reload();
+    $("#dataTable").dataTable().fnReloadAjax();
+}
 
     function save(){
     $('#btnSave').text('saving...');
@@ -42,7 +46,7 @@
 			if(data.status == false) alert(data.message);
 			else{
 				$('#modal_form').modal('hide');
-                reload_table();
+                table.ajax.reload();
 			}
             $('#btnSave').text('save');
             $('#btnSave').attr('disabled',false);
