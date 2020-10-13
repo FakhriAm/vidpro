@@ -32,9 +32,10 @@ class My_request extends MY_Controller
 				$key->from,  
 				$key->request_program, 
 				$key->notes, 
-				'<button class="btn btn-warning btn-icon-split btn-sm" href="#"><span></span><span class="text">'. $key->status.'</span></button>', 
-				$key->receive_date, 
-				
+				'<button class="btn btn-warning btn-icon-split btn-sm" href="#"><span class="text" style="color:white;">'. $key->status.'</span></button>', 
+				// $key->status,
+				$key->receive_date
+				// '<button class="btn btn-warning btn-icon-split btn-sm" href="#"><span class="text">"'. $key->status.'"</span></button>', 
 				// '<button class="btn btn-warning btn-icon-split btn-sm" href="#" onclick="showModal(' . "'" . $key->id . "'" . ')"data-toggle="modal" data-target="#editModal"><span class="icon text-white"><i class="fas fa-edit"></i></span><span class="text"> Edit</span></button><button class="btn btn-danger btn-icon-split btn-sm" onclick="deleteData(' . "'" . $key->id . "'" . ')"><span class="icon text-white"><i class="fas fa-trash"></i></span><span class="text">Delete</span></button>'
 			);
 		}
@@ -50,9 +51,10 @@ class My_request extends MY_Controller
 			$this->myrequest->save(
 				array(
 					'request_date' => $this->input->post('request_date'),
-					'request_date' => $this->input->post('video_source'),
-					'send_to' => $this->input->post('send_to'),
+					'send_to' => $this->input->post('video_source'),
+					'request_program' => $this->input->post('program_name'),
 					'notes' => $this->input->post('notes'),
+					// 'status' => $this->input->post($status)
 					// 'status' => $this->input->post('status'),
 					// 'user' => $this->input->post('user'),
 					// 'pic' => $this->input->post('pic'),

@@ -63,7 +63,7 @@
                         </div>
                         <div class="modal-body form">
                             <form action="#" id="form" class="form-horizontal">
-                                <input type="hidden" value="" id="" name="" />
+                                <input type="hidden" value="Waiting" id="" name="" />
                                 <input type="hidden" value="" id="id" name="id" />
                                 <div class="form-body">
                                     <div class="form-group">
@@ -94,6 +94,7 @@
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
+                                    <input type="hidden" value="Waiting" id="status" name=""/>
                                 </div>
                             </form>
                         </div>
