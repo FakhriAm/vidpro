@@ -1,5 +1,5 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
-class History_upload_model extends CI_Model {
+class Incoming_request_model extends CI_Model {
  
     var $table = 'video_meta';
     var $column_order = array('id_video',null,null,'journalist','description','tag','uploader','uploaded_date',null);
