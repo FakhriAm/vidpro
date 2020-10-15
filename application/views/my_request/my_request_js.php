@@ -14,7 +14,7 @@
             "dom": 'lfBrtip',
             "buttons": ['excel', 'print'],
             "columnDefs": [{
-                "targets": [1, 8],
+                "targets": [],
                 "orderable": false
             }],
             "columnDefs": [

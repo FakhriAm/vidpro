@@ -1,32 +1,63 @@
-<?php defined('BASEPATH') OR exit('No direct script access allowed');
-class Incoming_request extends MY_Controller {
+<?php defined('BASEPATH') or exit('No direct script access allowed');
+class Incoming_request extends MY_Controller
+{
 
-	function __construct(){
-        parent::__construct();
-        $this->load->model('Incoming_request_model', 'incoming');
-    }
-
-	public function index(){
-        $lists = $this->incoming->get_list_video_category();
-        $opt = array(0 => 'Select Category');
-        foreach ($lists as $key => $value) $opt[$key] = $value;
-		$this->load->view('part/default/wrapper',array('content'=>'incoming_request/incoming_request_view','content_js'=>'incoming_request/incoming_request_js','menu'=>$this->getAllUserMenu(),'filter_category'=>form_dropdown('',$opt,'','name="id_video_category" class="form-control"')));
+	function __construct()
+	{
+		parent::__construct();
+		$this->load->model('Incoming_request_model', 'incoming');
+		$this->load->model('video_model', 'vid');
 	}
 
-	public function ajax_list(){
-        $list = $this->incoming->get_datatables();
-        $data = array();
-		$crs = "";
-        $no = $_POST['start'];
-        foreach ($list as $key){
-        	$badge = '';
-        	$arr_badge = explode(",", $key->tag);
-        	if(sizeof($arr_badge) > 0) for ($i=0; $i < sizeof($arr_badge) ; $i++) $badge.='<span class="badge badge-info">'.$arr_badge[$i].'</span> ';
-        	else $badge = '-';
-            $data[] = array(++$no,'<img class="test" width="110" height="60" src="http://10.11.5.71/thumbnail/'.$key->id_thumbnail.'">',$key->video_title,$key->journalist,$key->description,$key->duration,$key->category,$badge,$key->uploader,$key->uploaded_date,'<button class="btn btn-warning btn-icon-split btn-sm" href="#" onclick="showModal('."'".$key->id_video."'".')"data-toggle="modal" data-target="#editModal"><span class="icon text-white"><i class="fas fa-edit"></i></span><span class="text"> Edit</span></button><button class="btn btn-danger btn-icon-split btn-sm" onclick="deleteData('."'".$key->id_video."'".')"><span class="icon text-white"><i class="fas fa-trash"></i></span><span class="text">Delete</span></button>');  
-        } 
-        echo json_encode(array("draw" => $_POST['draw'],"recordsTotal" => $this->incoming->count_all(),"recordsFiltered" => $this->history->count_filtered(),"data" => $data));
-    }
+	public function index()
+	{
+		// $lists = $this->incoming->get_list_video_category();
+		// $opt = array(0 => 'Select Category');
+		// foreach ($lists as $key => $value) $opt[$key] = $value;
+		date_default_timezone_set('Asia/Bangkok');
+		$this->load->view('part/default/wrapper', array('content' => 'incoming_request/incoming_request_view', 'content_js' => 'incoming_request/incoming_request_js', 'menu' => $this->getAllUserMenu(), 'video_source' => $this->loadVideoSource()));
+	}
 
-    
+	public function ajax_list()
+	{
+		$list = $this->incoming->get_datatables_inrequest();
+		$data = array();
+		$crs = "";
+		$no = $_POST['start'];
+		foreach ($list as $key) {
+			$data[] =
+				array(
+					++$no,
+					$key->request_date,
+					// $key->send_to,
+					$key->source,
+					$key->request_program,
+					$key->notes,
+					'<button class="btn btn-success btn-icon-split" href="#" onclick="showModal(' . "'" . $key->request_id . "'" . ')"data-toggle="modal" data-target="#uploadModal"><span class="icon text-white"><i class="fas fa-edit"></i></span><span class="text"> Upload</span></button>
+                	<button type="button" class="btn btn-danger" onclick="showModalnotfound(' . "'" . $key->request_id . "'" . ')" data-toggle="modal" data-target="#myModal"> <span class="icon text-white"><i class="fas fa-exclamation-triangle"></i></span><span class="text"> Not Available</span>',
+					$key->receive_date
+				);
+		}
+		echo json_encode(array("draw" => $_POST['draw'], "recordsTotal" => $this->incoming->count_all(), "data" => $data));
+	}
+
+	public function loadVideoSource()
+	{
+		return $this->vid->get_video_source();
+	}
+
+	public function finished_uploadtry()
+	{
+		$this->incoming->update(array('status' => '<a href="">Download</a>'), array('request_id' => $this->input->post('id')));
+	}
+
+	public function finished_upload()
+	{
+		$this->incoming->update(array('status' => 'Completed', 'receive_date' => date("Y-m-d h:i:s")), array('request_id' => $this->input->post('id')));
+	}
+
+	public function video_not_found()
+	{
+		$this->incoming->update(array('link' => 'not_found', 'receive_date' => date("Y-m-d h:i:s")), array('request_id' => $this->input->post('id')));
+	}
 }

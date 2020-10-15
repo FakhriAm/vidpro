@@ -46,71 +46,18 @@
             </p>
           </a>
           <ul class="nav nav-treeview">
-
-            <li>
-              <a href="#" class="nav-link">
-                <p>
-                  CNN Indonesia
-
-                </p>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link">
-                <p>
-                  TRANS TV
-
-                </p>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link">
-                <p>
-                  TRANS 7
-
-                </p>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link">
-                <p>
-                  TRANS VISION
-
-                </p>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link">
-                <p>
-                  CNBC Indonesia
-
-                </p>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link">
-                <p>
-                  DETIK COM
-
-                </p>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link">
-                <p>
-                  FEMALE DAILY
-
-                </p>
-              </a>
-            </li>
-            <li>
-              <a href="#" class="nav-link">
-                <p>
-                  BEAUTY NESIA
-
-                </p>
-              </a>
-            </li>
+            <?php foreach ($video_source as $key) {
+              $content = $key->content;
+              $content_link = strtolower($key->content);
+              $content_link = preg_replace('/\s+/', '_', $content_link);
+              $link = 'video/source/' . $content_link; ?>
+              <li class="nav-item">
+                <a href="<?php echo base_url($link) ?>" class="nav-link">
+                
+                  <p><?php echo ucfirst($content); ?></p>
+                </a>
+              </li>
+            <?php } ?>
           </ul>
         </li>
 

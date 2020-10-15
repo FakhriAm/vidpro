@@ -21,7 +21,7 @@ class Auth_model extends CI_Model{
 						$token_login = $this->generate_string($this->permitted_chars,100);
 					} while (!$this->check_token($token_login));
 					$this->db->update('users',array('token_login'=>$token_login,'last_login'=>date('Y-m-d h:i:s')),array('id'=>$user->id));
-					$this->session->set_userdata(array("id" => $user->id,"id_group" => $user->id_group,'token_login'=>$token_login,"login" => TRUE,'name'=>$user->first_name." ".$user->last_name));
+					$this->session->set_userdata(array("id" => $user->id,"id_group" => $user->id_group,'token_login'=>$token_login,"login" => TRUE,'name'=>$user->first_name." ".$user->last_name,"company" => $user->company));
 					$url = '';
 					if($user->id_group == 1 || $user->id_group == 2) $url = 'dashboard';
 					else if($user->id_group == 3) $url = 'pricing_video';

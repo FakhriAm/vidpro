@@ -11,9 +11,9 @@ class My_request_model extends CI_Model {
     
  
     public function get_list_company(){
-		$this->db->select('id,content');
+		$this->db->select('content,id');
         $this->db->from('video_source');
-        $this->db->where('active',1);
+        //$this->db->where('active_',1);
         $result = $this->db->get()->result();
 		$lists = array();
         foreach ($result as $row) $lists[$row->id] = $row->content;	
@@ -21,10 +21,17 @@ class My_request_model extends CI_Model {
     }
 
     public function get_datatables_myrequest(){
-		$this->db->select('*');
+        $n= $this->session->userdata('company');
+		$this->db->select('*,video_source.content as source');
         $this->db->from('request_transaction');
-        $this->db->where('active',1);
+        $this->db->join('video_source','request_transaction.send_to = video_source.id');
+       
+        $this->db->where('request_transaction.from',$n);
+        $this->db->where('active_trn',1);
+        $this->db->order_by("request_date", "desc");
         return $this->db->get()->result();
+
+        
 
     }
 

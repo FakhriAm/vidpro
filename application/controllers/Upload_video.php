@@ -1,22 +1,19 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 class Upload_video extends MY_Controller {
 
-	function __construct(){
+    function __construct(){
         parent::__construct();
         $this->load->model('upload_model', 'upload_video');
+        $this->load->model('incoming_request_model', 'incoming');
+        $this->load->model('video_model','vid');
     }
 
-	public function index(){
+    public function index(){
         $lists = $this->upload_video->get_list_video_category();
-        $lists2 = $this->upload_video->get_list_video_source();
         $opt = array(0 => 'Select Category');
         foreach ($lists as $key => $value) $opt[$key] = $value;
-
-        $opt2 = array(0 => 'Select Source');
-        foreach ($lists2 as $key2 => $value2) $opt2[$key2] = $value2;
-
-        $this->load->view('part/default/wrapper',array('content'=>'upload_video/upload_video_view','content_js'=>'upload_video/upload_video_js','menu'=>$this->getAllUserMenu(),'filter_category'=>form_dropdown('',$opt,'','name="id_video_category" class="form-control"'),'filter_source'=>form_dropdown('',$opt2,'','name="id_video_source" class="form-control"')));
-	}
+        $this->load->view('part/default/wrapper',array('content'=>'upload_video/upload_video_view','content_js'=>'upload_video/upload_video_js','menu'=>$this->getAllUserMenu(),'video_source'=> $this->loadVideoSource(),'filter_category'=>form_dropdown('',$opt,'','name="id_video_category" class="form-control"')));
+    }
 
     public function ajax_savevideo(){
        $this->form_validation->set_rules('videotitle','video title','trim|required|max_length[50]');
@@ -24,10 +21,6 @@ class Upload_video extends MY_Controller {
         $this->form_validation->set_rules('desc','description','trim|required|max_length[160]');
         $this->form_validation->set_rules('tag','tag','trim|required');
         $this->form_validation->set_rules('id_video_category','video category','trim|required|is_natural_no_zero');
-        $this->form_validation->set_rules('id_video_source','video source','trim|required|is_natural_no_zero');
-       /*  $this->form_validation->set_rules('hour','duration hour','trim|required|is_natural|less_than[100]');
-        $this->form_validation->set_rules('minute','duration minute','trim|required|is_natural|less_than[60]');
-        $this->form_validation->set_rules('second','duration second','trim|required|is_natural|less_than[60]'); */
         if($this->form_validation->run()===FALSE) echo json_encode(array("status" => FALSE,"message" => validation_errors()));  
         else{ 
           $video = $_FILES['videofile'];
@@ -66,7 +59,7 @@ class Upload_video extends MY_Controller {
                                     else {
                                         ftp_chmod($conn_id, 0644, '/home/cnnftpvcp/thumbnail/'.$thumbnail_name);
                                         $file = explode(".", $video_name);
-                                        $insert = $this->upload_video->save(array('video_title'=>strip_tags($this->input->post('videotitle')),'journalist'=>strip_tags($this->input->post('journo')),'description'=>strip_tags($this->input->post('desc')),'uploaded_date'=>date('Y:m:d H:i:s'),'uploader'=>$this->session->userdata('id'),'id_thumbnail'=>$thumbnail_name,'video_id'=>$video_name,'video_low'=>$file[0].".m3u8",'tag'=>strip_tags($this->input->post('tag')),'id_video_category'=>$this->input->post('id_video_category'),'id_video_source'=>$this->input->post('id_video_source'),'duration'=>$this->generateDuration($this->input->post('hour'),$this->input->post('minute'),$this->input->post('second'))));
+                                        $insert = $this->upload_video->save(array('video_title'=>strip_tags($this->input->post('videotitle')),'journalist'=>strip_tags($this->input->post('journo')),'description'=>strip_tags($this->input->post('desc')),'uploaded_date'=>date('Y:m:d H:i:s'),'uploader'=>$this->session->userdata('id'),'id_thumbnail'=>$thumbnail_name,'video_id'=>$video_name,'video_low'=>$file[0].".m3u8",'tag'=>strip_tags($this->input->post('tag')),'id_video_category'=>$this->input->post('id_video_category'),'duration'=>$this->generateDuration($this->input->post('hour'),$this->input->post('minute'),$this->input->post('second'))));
                                         echo json_encode(array("status" => true,"message"=>"Video & thumbnail uploaded sucessfully"));
                                     }  
                                 }
@@ -79,6 +72,38 @@ class Upload_video extends MY_Controller {
         }
          
     }
+
+	public function ajax_savevideo_modal(){
+          $video =$_FILES['videofile_modal'];
+		//Check Null
+		if(!empty($video['name'])){
+			if($this->validate_video_format($video['type'])){
+				$ftp_server = "10.11.5.71";  //address of ftp server.
+                $ftp_user_name = "cnnftpvcp"; // Username
+                $ftp_user_pass = "4dm1nCNN1nd";   // Password
+                $conn_id = ftp_connect($ftp_server); // set up basic connection
+                $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+					if((!$conn_id) || (!$login_result)){  
+                        // check connection
+                        ftp_close($conn_id);
+                        echo json_encode(array("status" => false,'message'=>'FTP connection has failed!'));
+                        }else {
+                            $timestamp = md5((round(microtime(true) * 1000)));
+                            // upload the file
+						$video_name = $timestamp."_".$video['name'];
+						   if (!ftp_put($conn_id, '/home/cnnftpvcp/video/'.$video_name, $video['tmp_name'], FTP_BINARY)) {
+                                echo json_encode(array("status" => false,'message'=>'Failed to upload file!'));
+                            }else{
+								$insert = $this->upload_video->save(array('uploaded_date'=>date('Y:m:d H:i:s'),'active'=>'0','uploader'=>$this->session->userdata('id'),'video_id'=>$video_name));
+								$update = $this->incoming->update(array('link'=>$video_name,'status'=>'Completed'),array('request_id'=>$this->input->post('id')));
+								echo json_encode(array("status" => true,"message"=>"Video Uploaded Sucessfully"));
+							}
+						}		
+							
+			}else echo json_encode(array("status" => false,'message'=>'Video Must Be MP4!'));
+		}else echo json_encode(array("status" => false,'message'=>'Video Cannot Be Null!'));
+	}
+
 
     public function validate_video_format($video){
         $allowed_ext = array('mp4','x-flv');
@@ -109,6 +134,7 @@ class Upload_video extends MY_Controller {
         $video_name = md5((round(microtime(true) * 1000)))."_".$video['name'];
         $file = explode(".", $name);
         $link = 'asset/hls/'.$file[0];
+		/* BUG HLS CANNOT GENERATE IF NAME FILE CONTAIN SPACE */
         $output=shell_exec("/usr/bin/ffmpeg -i ".$video['tmp_name']." -codec copy -c:v libx264 -preset veryfast -profile:v baseline -vsync cfr -s 160x120 -b:v 400k -bufsize 400k  -map 0 -f segment -vbsf h264_mp4toannexb -flags -global_header -segment_format mpegts -segment_list ".$link.".m3u8 2>&1 -segment_time 10 ".$link."-%03d.ts ");
         if (!ftp_put($conn_id, '/home/cnnftpvcp/hls/'.$file[0].".m3u8", $link.".m3u8", FTP_BINARY)) {
             return false;
@@ -127,12 +153,15 @@ class Upload_video extends MY_Controller {
                     } else {
                         //change mod 644 to ts
                         ftp_chmod($conn_id, 0644, $upload_file);
-						
-						
+                        
+                        
                     }
                 } else break;
             }
             return true;
         }
     }
+    public function loadVideoSource(){
+		return $this->vid->get_video_source();
+	}
 }

@@ -19,9 +19,10 @@ class Video_model extends CI_Model {
     public function get_video_source(){
         $this->db->select('id,content');
         $this->db->from('video_source');
-        $this->db->where('active',1);
+        $this->db->where('activate_',1);
         return $this->db->get()->result();
     }
+
 
     public function get_video_category(){
         $this->db->select('id,content');
@@ -79,6 +80,14 @@ class Video_model extends CI_Model {
         if($query->num_rows() > 0) return $query->result();
         else return array();
     }
+
+	public function get_latest_video(){
+		$this->get_video_query();
+		$this->db->order_by('uploaded_date','DESC');
+		$query = $this->db->get();
+        if($query->num_rows() > 0) return $query->result();
+        else return array();
+	}
 
     public function get_video_by_type_id($id){
         $this->get_video_query();

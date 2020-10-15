@@ -42,6 +42,7 @@
                                         <th>Note's</th>
                                         <th>Status</th>
                                         <th>Receive Date</th>
+                                        <th>Link Download</th>
                                     </tr>
                                 </thead>
 
@@ -69,7 +70,7 @@
                                     <div class="form-group">
                                         <label class="control-label col-md-6">Request Date</label>
                                         <div class="col-md-6">
-                                            <input type="date" id="request_date" name="request_date" placeholder="Date" class="form-control datepicker">
+                                            <input type="input" id="request_date" name="request_date" placeholder='<?php echo date("Y/m/d");?>' disabled>
                                             <span class="help-block"></span>
                                         </div>
                                     </div>
