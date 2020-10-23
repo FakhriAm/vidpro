@@ -25,6 +25,7 @@ class Incoming_request extends MY_Controller
 		$crs = "";
 		$no = $_POST['start'];
 		foreach ($list as $key) {
+<<<<<<< HEAD
 			$a = $key->link;
 			$b = $key->status;
 			if($a != null ){
@@ -36,6 +37,8 @@ class Incoming_request extends MY_Controller
 				$a = '<button class="btn btn-success" href="#" onclick="showModal(' . "'" . $key->request_id . "'" . ')"data-toggle="modal" data-target="#uploadModal"><span class="icon text-white"><i class="fas fa-edit"></i></span><span class="text"> Upload</span></button>
 				<button type="button" class="btn btn-danger" onclick="setVideoNotAvailable(' . "'" . $key->request_id . "'" . ')" data-toggle="modal" data-target="#myModal"> <span class="icon text-white"><i class="fas fa-exclamation-triangle"></i></span><span class="text"> Not Available</span>';
 			}}
+=======
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
 			$data[] =
 				array(
 					++$no,
@@ -44,6 +47,7 @@ class Incoming_request extends MY_Controller
 					$key->source,
 					$key->request_program,
 					$key->notes,
+<<<<<<< HEAD
 					$a,
 					$key->uploaded_date
 				);
@@ -93,5 +97,33 @@ class Incoming_request extends MY_Controller
         header("Content-Transfer-Encoding: binary");
         readfile($this->input->get('link'));
         exit();
+=======
+					'<button class="btn btn-success btn-icon-split" href="#" onclick="showModal(' . "'" . $key->request_id . "'" . ')"data-toggle="modal" data-target="#uploadModal"><span class="icon text-white"><i class="fas fa-edit"></i></span><span class="text"> Upload</span></button>
+                	<button type="button" class="btn btn-danger" onclick="showModalnotfound(' . "'" . $key->request_id . "'" . ')" data-toggle="modal" data-target="#myModal"> <span class="icon text-white"><i class="fas fa-exclamation-triangle"></i></span><span class="text"> Not Available</span>',
+					$key->receive_date
+				);
+		}
+		echo json_encode(array("draw" => $_POST['draw'], "recordsTotal" => $this->incoming->count_all(), "data" => $data));
+	}
+
+	public function loadVideoSource()
+	{
+		return $this->vid->get_video_source();
+	}
+
+	public function finished_uploadtry()
+	{
+		$this->incoming->update(array('status' => '<a href="">Download</a>'), array('request_id' => $this->input->post('id')));
+	}
+
+	public function finished_upload()
+	{
+		$this->incoming->update(array('status' => 'Completed', 'receive_date' => date("Y-m-d h:i:s")), array('request_id' => $this->input->post('id')));
+	}
+
+	public function video_not_found()
+	{
+		$this->incoming->update(array('link' => 'not_found', 'receive_date' => date("Y-m-d h:i:s")), array('request_id' => $this->input->post('id')));
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
 	}
 }

@@ -20,9 +20,14 @@ class Auth_model extends CI_Model{
 					do{
 						$token_login = $this->generate_string($this->permitted_chars,100);
 					} while (!$this->check_token($token_login));
+<<<<<<< HEAD
 					$ip = $this->input->ip_address();
 					$this->db->update('users',array('ip_address'=>$ip,'token_login'=>$token_login,'last_login'=>date('Y-m-d H:i:s')),array('id'=>$user->id));
 					$this->session->set_userdata(array("id" => $user->id,"username" => $user->username,"id_group" => $user->id_group,'token_login'=>$token_login,"login" => TRUE,'name'=>$user->first_name." ".$user->last_name,"company" => $user->company,"desc_company" => $user->deskripsi_company,"last_login" => $user->last_login));
+=======
+					$this->db->update('users',array('token_login'=>$token_login,'last_login'=>date('Y-m-d h:i:s')),array('id'=>$user->id));
+					$this->session->set_userdata(array("id" => $user->id,"id_group" => $user->id_group,'token_login'=>$token_login,"login" => TRUE,'name'=>$user->first_name." ".$user->last_name,"company" => $user->company));
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
 					$url = '';
 					if($user->id_group == 1 || $user->id_group == 2) $url = 'dashboard';
 					else if($user->id_group == 3) $url = 'pricing_video';

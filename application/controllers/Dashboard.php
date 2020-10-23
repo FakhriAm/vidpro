@@ -15,6 +15,7 @@ class Dashboard extends MY_Controller {
         $this->load->view('part/default/wrapper',array('content'=>'dashboard/dashboard','video_source'=> $this->loadVideoSource(),'content_js'=>'dashboard/dashboard_js','menu'=>$this->getAllUserMenu(),'data'=>$this->vid->get_latest_video()));
 	}
 	
+<<<<<<< HEAD
 	public function source($q){
 		$row = $this->vid->check_video_source(strip_tags($q));
 		if(!$row) redirect('au');
@@ -44,4 +45,9 @@ class Dashboard extends MY_Controller {
 	public function profile(){
         $this->load->view('part/default/wrapper', array('content' => 'user/profile', 'menu' => $this->getAllUserMenu()));
     }
+=======
+	public function loadVideoSource(){
+		return $this->vid->get_video_source();
+	}
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
 }

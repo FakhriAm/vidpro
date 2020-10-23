@@ -2,7 +2,11 @@
 class Incoming_request_model extends CI_Model {
  
     var $table = 'request_transaction';
+<<<<<<< HEAD
   //  var $column_order = array('id_video',null,null,'journalist','description','tag','uploader','uploaded_date',null);
+=======
+    var $column_order = array('id_video',null,null,'journalist','description','tag','uploader','uploaded_date',null);
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
     var $column_search = array('video_title','description','journalist','tag');
   //  var $order = array('video_meta.id_video' => 'desc');
  
@@ -11,6 +15,7 @@ class Incoming_request_model extends CI_Model {
         $this->load->database();
     }
 
+<<<<<<< HEAD
     // public function get_datatables_inrequest(){
       
     //     $n= $this->session->userdata('company');
@@ -58,20 +63,39 @@ class Incoming_request_model extends CI_Model {
         $this->_get_datatables_query();
         if($_POST['length'] != -1)
         $this->db->limit($_POST['length'], $_POST['start']);
+=======
+    public function get_datatables_inrequest(){
+      
+        $n= $this->session->userdata('company');
+		$this->db->select('*,video_source.content as source');
+        $this->db->from('request_transaction');
+        $this->db->join('video_source','request_transaction.from = video_source.id');
+        $this->db->where('request_transaction.send_to',$n);
+        // $this->db->where('request_transaction.link',null);
+
+        $this->db->order_by("request_date", "desc");
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
         return $this->db->get()->result();
+
     }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
     public function count_all(){
         $this->db->from($this->table);
         return $this->db->count_all_results();
     }
+<<<<<<< HEAD
 
     public function count_filtered(){
         $this->_get_datatables_query();
         return $this->db->get()->num_rows();
     }
+=======
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
 	
     public function request_finished($data, $where){
         $this->db->update($this->table, $data, $where);
@@ -82,9 +106,19 @@ class Incoming_request_model extends CI_Model {
         $this->db->where('id_video',$id);
         return $this->db->get()->row();
     }
+<<<<<<< HEAD
 	
       public function update($data, $where){
         $this->db->update($this->table, $data, $where);
     }
+=======
+      public function update($data, $where){
+        $this->db->update($this->table, $data, $where);
+    }
+
+    public function update_link_not_found(){
+        $this->db->update($this->table, $data, $where);
+    }
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
 }
 ?>  

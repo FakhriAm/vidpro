@@ -75,6 +75,17 @@
                   </div>
                 </div>
               </div>
+<<<<<<< HEAD
+=======
+              <div class="form-group">
+                <div class="row">
+                  <label class="label col-2 text-right">Video tag</label>
+                  <div class="col-md-9">
+                    <textarea class="form-control" placeholder="ex: Pemerintah,Politik,Nama Tokoh,Jakarta" name="tag"></textarea>
+                  </div>
+                </div>
+              </div>
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
             </form>
             <div class="button-footer">
               <button type="button" class="btn btn-info float-right" onclick="save()">

@@ -60,7 +60,11 @@ class Upload_video extends MY_Controller {
                                     else {
                                         ftp_chmod($conn_id, 0644, '/home/cnnftpvcp/thumbnail/'.$thumbnail_name);
                                         $file = explode(".", $video_name);
+<<<<<<< HEAD
                                         $insert = $this->upload_video->save(array('video_title'=>strip_tags($this->input->post('videotitle')),'journalist'=>strip_tags($this->input->post('journo')),'description'=>strip_tags($this->input->post('desc')),'uploaded_date'=>date('Y:m:d H:i:s'),'id_video_source'=>$this->session->userdata('company'),'uploader'=>$this->session->userdata('id'),'id_thumbnail'=>$thumbnail_name,'video_id'=>$video_name,'video_low'=>$file[0].".m3u8",'tag'=>strip_tags($this->input->post('tag')),'id_video_category'=>$this->input->post('id_video_category'),'duration'=>$this->generateDuration($this->input->post('hour'),$this->input->post('minute'),$this->input->post('second'))));
+=======
+                                        $insert = $this->upload_video->save(array('video_title'=>strip_tags($this->input->post('videotitle')),'journalist'=>strip_tags($this->input->post('journo')),'description'=>strip_tags($this->input->post('desc')),'uploaded_date'=>date('Y:m:d H:i:s'),'uploader'=>$this->session->userdata('id'),'id_thumbnail'=>$thumbnail_name,'video_id'=>$video_name,'video_low'=>$file[0].".m3u8",'tag'=>strip_tags($this->input->post('tag')),'id_video_category'=>$this->input->post('id_video_category'),'duration'=>$this->generateDuration($this->input->post('hour'),$this->input->post('minute'),$this->input->post('second'))));
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
                                         echo json_encode(array("status" => true,"message"=>"Video & thumbnail uploaded sucessfully"));
                                     }  
                                 }
@@ -76,7 +80,10 @@ class Upload_video extends MY_Controller {
 
 	public function ajax_savevideo_modal(){
           $video =$_FILES['videofile_modal'];
+<<<<<<< HEAD
           date_default_timezone_set('Asia/Bangkok');
+=======
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
 		//Check Null
 		if(!empty($video['name'])){
 			if($this->validate_video_format($video['type'])){
@@ -85,7 +92,10 @@ class Upload_video extends MY_Controller {
                 $ftp_user_pass = "4dm1nCNN1nd";   // Password
                 $conn_id = ftp_connect($ftp_server); // set up basic connection
                 $login_result = ftp_login($conn_id, $ftp_user_name, $ftp_user_pass);
+<<<<<<< HEAD
                 date_default_timezone_set('Asia/Bangkok');
+=======
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
 					if((!$conn_id) || (!$login_result)){  
                         // check connection
                         ftp_close($conn_id);
@@ -97,9 +107,14 @@ class Upload_video extends MY_Controller {
 						   if (!ftp_put($conn_id, '/home/cnnftpvcp/video/'.$video_name, $video['tmp_name'], FTP_BINARY)) {
                                 echo json_encode(array("status" => false,'message'=>'Failed to upload file!'));
                             }else{
+<<<<<<< HEAD
 								ftp_chmod($conn_id, 0644, '/home/cnnftpvcp/video/'.$video_name);
 								$insert = $this->upload_video->save(array('uploaded_date'=>date('Y:m:d H:i:s'),'active'=>'0','uploader'=>$this->session->userdata('id'),'video_id'=>$video_name));
 								$update = $this->incoming->update(array('uid_uploader'=>$this->session->userdata('id'),'receive_date'=>date('Y:m:d H:i:s'),'link'=>$video_name,'status'=>'Completed'),array('request_id'=>$this->input->post('id')));
+=======
+								$insert = $this->upload_video->save(array('uploaded_date'=>date('Y:m:d H:i:s'),'active'=>'0','uploader'=>$this->session->userdata('id'),'video_id'=>$video_name));
+								$update = $this->incoming->update(array('link'=>$video_name,'status'=>'Completed'),array('request_id'=>$this->input->post('id')));
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
 								echo json_encode(array("status" => true,"message"=>"Video Uploaded Sucessfully"));
 							}
 						}		

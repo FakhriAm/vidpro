@@ -23,7 +23,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
+<<<<<<< HEAD
 $config['base_url'] = 'http://172.17.20.98/vidpro';
+=======
+$config['base_url'] = 'http://localhost/vidpro_new';
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
 
 /*
 |--------------------------------------------------------------------------

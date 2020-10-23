@@ -61,7 +61,11 @@
               $content = $key->content;
               $content_link = strtolower($key->content);
               $content_link = preg_replace('/\s+/', '_', $content_link);
+<<<<<<< HEAD
               $link = 'dashboard/source/' . $content_link; ?>
+=======
+              $link = 'video/source/' . $content_link; ?>
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
               <li class="nav-item">
                 <a href="<?php echo base_url($link) ?>" class="nav-link">
                 

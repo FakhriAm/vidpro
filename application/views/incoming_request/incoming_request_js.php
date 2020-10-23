@@ -49,6 +49,7 @@ var formData = new FormData($("#formuploadmodal")[0]);
             console.log('Uploading job done');
         }
     }); 
+<<<<<<< HEAD
 }
 
 function setVideoNotAvailable(id){
@@ -87,6 +88,24 @@ function setVideoNotAvailable(id){
 		    });
 		}
 	});
+=======
+}
+
+function video_not_found(){
+ 
+}
+
+function showModal(id){
+	document.getElementById('formuploadmodal').reset();
+	$('#id').val(id);
+	$('#modal_upload').modal('show');
+}
+
+function showModalnotfound(id){
+	// document.getElementById('formuploadmodalnotfound').reset();
+	$('#id').val(id);
+	$('#modal_notfound').modal('show');
+>>>>>>> 108a936ea22636da8d6d1187b7b0ea59dfd2f8dd
 }
 function showModal(id){
 	document.getElementById('formuploadmodal').reset();
