@@ -11,10 +11,11 @@ class Auth extends CI_Controller {
 	}
 
 	public function login(){
-		$this->form_validation->set_rules('nik','nik','trim|required|is_natural');
+		date_default_timezone_set('Asia/Bangkok');
+		$this->form_validation->set_rules('username','username','trim|required');
         $this->form_validation->set_rules('pass','password','trim|required');
         if ($this->form_validation->run() == FALSE) echo json_encode(array('status'=>false,'message'=>validation_errors()));
-        else echo json_encode($this->auth->login($this->input->post('nik'),$this->input->post('pass')));
+        else echo json_encode($this->auth->login($this->input->post('username'),$this->input->post('pass')));
 	}
 
 	public function logout(){

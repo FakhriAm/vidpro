@@ -11,16 +11,6 @@ class Upload_model extends CI_Model {
 	public function get_list_video_category(){
 		$this->db->select('id,content');
         $this->db->from('video_category');
-         $this->db->where('active',1);
-        $result = $this->db->get()->result();
-		$lists = array();
-        foreach ($result as $row) $lists[$row->id] = $row->content;	
-        return $lists;
-	}
-	public function get_list_video_source(){
-		$this->db->select('id,content');
-        $this->db->from('video_source');
-        $this->db->where('active',1);
         $result = $this->db->get()->result();
 		$lists = array();
         foreach ($result as $row) $lists[$row->id] = $row->content;	

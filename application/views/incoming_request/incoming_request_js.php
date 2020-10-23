@@ -1,98 +1,60 @@
 <script type="text/javascript">
 var table;
 $(document).ready(function() {
-  table = $('#dataTable').DataTable({ 
+  table = $('#in_request').DataTable({ 
         "processing": true,
         "serverSide": true,
         "order": [],
 		"destroy":true,
         "ajax": {
-            "url": "<?php echo site_url('history_upload/ajax_list')?>",
+            "url": "<?php echo site_url('incoming_request/ajax_list')?>",
             "type": "POST",
             "data": function ( data ) {}
         },
         "dom": 'lfBrtip',
-        "buttons": ['excel','print'],
-        "columnDefs": [{"targets": [ 1,8 ],"orderable": false}]
+        "buttons": ['excel','print']
     });
-	
+	  $(".custom-file-input").on("change", function() {
+    var fileName = $(this).val().split("\\").pop();
+    $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+  });
 	//$("#upload_num").html('2');
 });
-function showModal(id){
-	document.getElementById('form-modal').reset();
-	$('#id').val(id);
-	$.ajax({
-        url : "<?php echo site_url('history_upload/ajax_get_detail')?>",
+function save_modal_upload(){
+var formData = new FormData($("#formuploadmodal")[0]);
+    $.ajax({
+        url : "<?php echo site_url('upload_video/ajax_savevideo_modal')?>",
         type: "POST",
-        data: {id:id},
+        data: formData,
+        contentType: false,
+        processData: false,
         dataType: "JSON",
         beforeSend: function(){
-                    showLoading("loading","Please wait");
+                    showLoading("Uploading...","It takes several minutes");
                 },
         success: function(data){
-			if(!data.status) showAlert('Failed!',data.message.toString().replace(/<[^>]*>/g, ''),'error');
-			else{
-				var duration = data.row.duration.split(":");
-				$('[name="videotitle"]').val(data.row.video_title);
-                $('[name="journo"]').val(data.row.journalist);
-                $('[name="desc"]').val(data.row.description);
-                $('[name="tag"]').val(data.row.tag);
-                $('[name="id_video_category"]').val(data.row.id_video_category);
-                $('[name="hour"]').val(parseInt(duration[0]));
-                $('[name="minute"]').val(parseInt(duration[1]));
-                $('[name="second"]').val(parseInt(duration[2]));
-            	$('#content-modal').modal('show');
+			/* if(!data.status)alert("ho"); */
+			if(!data.status)showAlert('Failed to upload',data.message.toString().replace(/<[^>]*>/g, ''),'error');
+			else{				
+                $('#label-video-modal').html('Choose file');
+                document.getElementById('formuploadmodal').reset();
+                showAlert("Good job!", "Video uploaded!", "success");
+				location.reload();
             } 
         },
         error: function (jqXHR, textStatus, errorThrown){
             showAlert('Operation Failed!',errorThrown,'error');
         },
         complete: function(){
-            console.log('Show data complete');
-            swal.close();
+            console.log('Uploading job done');
         }
-    });
+    }); 
 }
-function editData(){
+
+function setVideoNotAvailable(id){
 	swal({
 	  title: "Are you sure?",
-	  text: "Your data will be changed!",
-	  type: "info",
-	  showCancelButton: true,
-	  closeOnConfirm: false,
-	  showLoaderOnConfirm: true
-	}, function (confirm) {
-		if(confirm){
-			 $.ajax({
-		        url : "<?php echo site_url('history_upload/ajax_edit')?>",
-		        type: "POST",
-		        data: $('#form-modal').serialize(),
-		        dataType: "JSON",
-		        beforeSend: function(){
-		                    showLoading("loading","Please wait");
-		                },
-		        success: function(data){
-					if(!data.status) showAlert('Failed!',data.message.toString().replace(/<[^>]*>/g, ''),'error');
-					else{
-		                showAlert("Good job!", "Your data has changed!", "success");
-		                $('#content-modal').modal('hide');
-		                table.ajax.reload();
-		            } 
-		        },
-		        error: function (jqXHR, textStatus, errorThrown){
-		            showAlert('Operation Failed!',errorThrown,'error');
-		        },
-		        complete: function(){
-		            console.log('Edit job done');
-		        }
-		    });
-		}
-	});
-}
-function deleteData(id){
-	swal({
-	  title: "Are you sure?",
-	  text: "Your will not be able to recover this data!",
+	  text: "You Cannot Undo This!",
 	  type: "warning",
 	  showCancelButton: true,
 	  closeOnConfirm: false,
@@ -100,7 +62,7 @@ function deleteData(id){
 	}, function (confirm) {
 		if(confirm){
 			$.ajax({
-		        url : "<?php echo site_url('history_upload/ajax_delete')?>",
+		        url : "<?php echo site_url('incoming_request/ajax_delete')?>",
 		        type: "POST",
 		        data: {id:id},
 		        dataType: "JSON",
@@ -110,7 +72,7 @@ function deleteData(id){
 		        success: function(data){
 					if(!data.status) showAlert('Failed!',data.message.toString().replace(/<[^>]*>/g, ''),'error');
 					else{
-		                showAlert("Deleted!", "Your data has been deleted.", "success");
+		                showAlert("Done!", "The Requested Video Has Been Set Unavailable.", "success");
 		                table.ajax.reload();
 		            } 
 		        },
@@ -125,5 +87,16 @@ function deleteData(id){
 		    });
 		}
 	});
+}
+function showModal(id){
+	document.getElementById('formuploadmodal').reset();
+	$('#id').val(id);
+	$('#modal_upload').modal('show');
+}
+
+function showModalnotfound(id){
+	// document.getElementById('formuploadmodalnotfound').reset();
+	$('#id').val(id);
+	$('#modal_notfound').modal('show');
 }
 </script>

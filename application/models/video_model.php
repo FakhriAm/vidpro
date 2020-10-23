@@ -19,9 +19,10 @@ class Video_model extends CI_Model {
     public function get_video_source(){
         $this->db->select('id,content');
         $this->db->from('video_source');
-        $this->db->where('active',1);
+        $this->db->where('activate_',1);
         return $this->db->get()->result();
     }
+
 
     public function get_video_category(){
         $this->db->select('id,content');
@@ -54,6 +55,15 @@ class Video_model extends CI_Model {
         if($query->num_rows() == 1) return $query->row();
         else return false;
     }
+	
+    public function check_video_source($name){
+        $this->db->from('video_source');
+        $this->db->where('activate_',1);
+        $this->db->where('content_links',$name);
+        $query = $this->db->get();
+        if($query->num_rows() == 1) return $query->row();
+        else return false;
+    }
 
     public function get_video_query(){
         /*$this->db->select('video_meta.*,video_price.content as price, video_category.content as category, video_type.content as type');
@@ -64,10 +74,11 @@ class Video_model extends CI_Model {
         $this->db->where('id_status',3);
         $this->db->where('video_meta.active',1);  */
 
-        $this->db->select('video_meta.*,video_price.content as price, video_category.content as category, video_type.content as type');
+        $this->db->select('video_meta.*,video_price.content as price,  video_type.content as type, users.first_name, users.last_name,deskripsi_company,video_source.company_img');
         $this->db->from('video_meta');
+        $this->db->join('users','video_meta.uploader = users.id','left');
         $this->db->join('video_price','video_meta.id_video_price = video_price.id','left');
-        $this->db->join('video_category','video_meta.id_video_category = video_category.id','left');
+        $this->db->join('video_source','video_meta.id_video_source = video_source.id','left');
         $this->db->join('video_type','video_meta.id_video_type = video_type.id','left');
         $this->db->where('video_meta.active',1);  
     }
@@ -79,6 +90,20 @@ class Video_model extends CI_Model {
         if($query->num_rows() > 0) return $query->result();
         else return array();
     }
+    public function get_video_by_source_id($id){
+        $this->get_video_query();
+        $this->db->where('id_video_source',$id);
+        $query = $this->db->get();
+        if($query->num_rows() > 0) return $query->result();
+        else return array();
+    }
+	public function get_latest_video(){
+		$this->get_video_query();
+		$this->db->order_by('uploaded_date','DESC');
+		$query = $this->db->get();
+        if($query->num_rows() > 0) return $query->result();
+        else return array();
+	}
 
     public function get_video_by_type_id($id){
         $this->get_video_query();

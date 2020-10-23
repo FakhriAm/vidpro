@@ -44,42 +44,47 @@
 					<h4 style="text-align: center; color:#3366e8; font-weight: bold;">
 						Sharing Media
 					</h4>
-
-					<div class="validate-input" data-validate="Valid NIK is required">
-						<span class="label-input100">Username</span>
-						<input class="input100" type="text" name="nik" placeholder="Username">
+					<div class="text-right p-t-8 p-b-31">
+						<!-- <a href="<?php echo base_url('auth/page404') ?>">
+							Forgot password?
+						</a> -->
+					</div>
+					<div class="wrap-input100 validate-input" data-validate="Valid username is required">
+						<span class="label-input100"><b>Username</b></span>
+						<input class="input100" type="text" name="username" placeholder="Insert your username">
 						<span class="focus-input100" data-symbol=""></span>
 					</div>
 
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<span class="label-input100">Password</span>
-						<input class="input100" type="password" name="pass" placeholder="">
+						<span class="label-input100"><b>Password</b></span>
+						<input class="input100" type="password" name="pass" placeholder="*********">
 						<span class="focus-input100" data-symbol=""></span>
 					</div>
 
 					<div class="text-right p-t-8 p-b-31">
-						<a href="<?php echo base_url('auth/page404') ?>">
+						<!-- <a href="<?php echo base_url('auth/page404') ?>">
 							Forgot password?
-						</a>
-					</div>
-
-					<div class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button href="#" id="btn-login" class="login100-form-btn" onclick="login()">
-								Login
-							</button>
-						</div>
+						</a> -->
 					</div>
 					<div class="flex-col-c p-t-155">
-						<span class="txt1 p-b-17">
+						<!-- <span class="txt1 p-b-17">
 							Or Sign Up Using
 						</span>
 
 						<a href="<?php echo base_url('auth/page404') ?>">
 							Sign Up
-						</a>
+						</a> -->
 					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button href="#" id="btn-login" class="login100-form-btn" onclick="login()" type="button">
+								Login
+							</button>
+						</div>
+					</div>
+					
 				</form>
 			</div>
 		</div>
